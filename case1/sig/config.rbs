@@ -1,3 +1,11 @@
 class Config
-  def self.configure: { (Config) -> String } -> Config
+  @client: Langchain::LLM::OpenAI
+  @role: String
+  @prompt: String
+
+  def self.configure: { (Config) -> void } -> Config
+
+  attr_accessor client: Langchain::LLM::OpenAI
+  attr_accessor role: String
+  attr_accessor prompt: String
 end

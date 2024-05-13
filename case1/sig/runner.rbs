@@ -1,6 +1,6 @@
 class Runner
   def initialize: (Config config) -> void
-  def run: -> untyped
+  def run: () -> Langchain::LLMResult
 
   private
   attr_reader config: Config
