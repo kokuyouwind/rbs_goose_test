@@ -6,6 +6,7 @@ source "https://rubygems.org"
 gem 'anthropic'
 gem 'dotenv'
 gem 'faraday'
+gem 'langchainrb'
 gem 'rake'
 gem 'rbs_goose'
 gem 'rubocop'

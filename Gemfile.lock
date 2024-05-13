@@ -153,6 +153,7 @@ DEPENDENCIES
   anthropic
   dotenv
   faraday
+  langchainrb
   rake
   rbs_goose
   rubocop
