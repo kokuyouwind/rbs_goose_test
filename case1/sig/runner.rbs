@@ -1,5 +1,5 @@
 class Runner
-  def initialize: (Config config) -> void
+  def initialize: (config: Config) -> void
   def run: -> untyped
 
   private
