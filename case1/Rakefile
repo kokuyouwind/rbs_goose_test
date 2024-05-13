@@ -1,0 +1,56 @@
+# frozen_string_literal: true
+
+require 'dotenv/load'
+require 'langchain'
+require 'openai'
+require 'rbs_goose'
+
+namespace :rbs_goose do
+  desc 'Run rbs_goose with OpenAI GPT-3.5-turbo-0125 model.'
+  task :openai_gpt35 do
+    RbsGoose.configure do |config|
+      config.use_open_ai(ENV.fetch('OPENAI_ACCESS_TOKEN'), model_name: 'gpt-3.5-turbo-0125')
+    end
+    RbsGoose.run
+  end
+
+  desc 'Run rbs_goose with OpenAI GPT-4-turbo-2024-04-09 model.'
+  task :openai_gpt4 do
+    RbsGoose.configure do |config|
+      config.use_open_ai(ENV.fetch('OPENAI_ACCESS_TOKEN'), model_name: 'gpt-4-turbo-2024-04-09')
+    end
+    RbsGoose.run
+  end
+
+  desc 'Run rbs_goose with Anthropic Claude-3-haiku-20240307 model.'
+  task :anthropic_claude_haiku do
+    RbsGoose.configure do |config|
+      config.use_anthropic(ENV.fetch('ANTHROPIC_API_KEY', nil), model_name: 'claude-3-haiku-20240307')
+    end
+    RbsGoose.run
+  end
+
+  desc 'Run rbs_goose with Anthropic Claude-3-sonnet-20240229 model.'
+  task :anthropic_claude_sonnet do
+    RbsGoose.configure do |config|
+      config.use_anthropic(ENV.fetch('ANTHROPIC_API_KEY', nil), model_name: 'claude-3-sonnet-20240229')
+    end
+    RbsGoose.run
+  end
+
+  desc 'Run rbs_goose with Anthropic Claude-3-opus-20240229 model.'
+  task :anthropic_claude_opus do
+    RbsGoose.configure do |config|
+      config.use_anthropic(ENV.fetch('ANTHROPIC_API_KEY', nil), model_name: 'claude-3-opus-20240229')
+    end
+    RbsGoose.run
+  end
+
+  desc 'Run rbs_goose with Ollama codegemma model.'
+  task :ollama_codegemma do
+    RbsGoose.configure do |config|
+      config.use_ollama(model_name: 'codegemma')
+    end
+    RbsGoose.run
+  end
+end
