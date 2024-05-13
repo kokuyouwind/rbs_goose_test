@@ -1,11 +1,9 @@
 class Runner
-  public
-
   def run: () -> untyped
 
   private
 
-  def config: () -> untyped
+  attr_reader config: Config
 
-  def initialize: (untyped config) -> void
+  def initialize: (Config config) -> void
 end

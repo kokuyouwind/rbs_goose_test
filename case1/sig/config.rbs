@@ -1,17 +1,9 @@
 class Config
-  def self.configure: () { (*untyped) -> untyped } -> untyped
+  attr_accessor client: Langchain::LLM::OpenAI
 
-  public
+  attr_accessor role: String
 
-  def client: () -> untyped
+  attr_accessor prompt: String
 
-  def client=: (untyped) -> untyped
-
-  def prompt: () -> untyped
-
-  def prompt=: (untyped) -> untyped
-
-  def role: () -> untyped
-
-  def role=: (untyped) -> untyped
+  def self.configure: () { (Config) -> void } -> Config
 end
