@@ -1,17 +1,5 @@
-class Config
-  def self.configure: () { (*untyped) -> untyped } -> untyped
+class Runner
+  def initialize: (config: Config) -> void
 
-  public
-
-  def client: () -> untyped
-
-  def client=: (untyped) -> untyped
-
-  def prompt: () -> untyped
-
-  def prompt=: (untyped) -> untyped
-
-  def role: () -> untyped
-
-  def role=: (untyped) -> untyped
+  def run: () -> untyped
 end
