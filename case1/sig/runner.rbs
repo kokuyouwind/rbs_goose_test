@@ -1,7 +1,9 @@
 class Runner
   def initialize: (Config config) -> void
-  def run: -> untyped
+
+  def run: () -> Langchain::ChatCompletion
 
   private
+
   attr_reader config: Config
 end
