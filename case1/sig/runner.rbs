@@ -1,17 +1,11 @@
-class Config
-  def self.configure: () { (*untyped) -> untyped } -> untyped
+class Runner
+  @config: Config
 
-  public
+  def initialize: (Config config) -> void
 
-  def client: () -> untyped
+  def run: () -> untyped
 
-  def client=: (untyped) -> untyped
+  private
 
-  def prompt: () -> untyped
-
-  def prompt=: (untyped) -> untyped
-
-  def role: () -> untyped
-
-  def role=: (untyped) -> untyped
+  attr_reader config: Config
 end
