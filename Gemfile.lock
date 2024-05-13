@@ -79,7 +79,7 @@ GEM
       ffi (~> 1.0)
     rbs (3.4.4)
       abbrev
-    rbs_goose (0.2.0)
+    rbs_goose (0.2.1)
       anthropic (>= 0.2.0, < 1.0.0)
       faraday (>= 2.9.0, < 3.0.0)
       langchainrb (>= 0.12.0, < 1.0.0)
@@ -155,7 +155,7 @@ DEPENDENCIES
   faraday
   langchainrb
   rake
-  rbs_goose
+  rbs_goose (= 0.2.1)
   rubocop
   rubocop-rake
   ruby-openai

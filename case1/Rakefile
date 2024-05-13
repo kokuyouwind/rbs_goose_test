@@ -4,6 +4,8 @@ require 'dotenv/load'
 require 'langchain'
 require 'openai'
 require 'rbs_goose'
+require 'anthropic'
+require 'faraday'
 
 instruction = <<~INSTRUCTION
         Your job is to output a more reasonable RBS type definition based on the given Ruby code and RBS type definition.
