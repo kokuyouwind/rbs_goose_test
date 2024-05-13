@@ -1,11 +1,9 @@
 class Runner
-  public
+  def initialize: (Config config) -> void
 
-  def run: () -> untyped
+  def run: () -> Langchain::LLM::OpenAI::ChatCompletion
 
   private
 
-  def config: () -> untyped
-
-  def initialize: (untyped config) -> void
+  attr_reader config: Config
 end
