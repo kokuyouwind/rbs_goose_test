@@ -1,11 +1,11 @@
 class Runner
-  @config: untyped
+  @config: Config
 
-  def initialize: (untyped config) -> void
+  def initialize: (Config config) -> void
 
   def run: () -> untyped
 
   private
 
-  attr_reader config: untyped
+  attr_reader config: Config
 end

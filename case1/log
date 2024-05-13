@@ -1,0 +1,304 @@
+Run RbsGoose.(Code Directory: lib, Signature Directory: sig)
+!!!!!!!! Prompt !!!!!!!!
+
+role: user
+content:
+Your job is to output a more reasonable RBS type definition based on the given Ruby code and RBS type definition.
+For all input RBS type definitions, output an improved RBS type definition.
+Replace untyped with concrete types whenever possible and add any missing method definitions, attr_accessor, etc.
+Correct any mistakes in existing types.
+
+
+========Input========
+```ruby:lib/email.rb
+class Email
+  # @dynamic address
+  attr_reader :address
+
+  def initialize(address:)
+    @address = address
+  end
+
+  def ==(other)
+    other.is_a?(self.class) && other.address == address
+  end
+
+  def hash
+    self.class.hash ^ address.hash
+  end
+end
+```
+
+```rbs:sig/email.rbs
+class Email
+  @address: untyped
+
+  attr_reader address: untyped
+
+  def initialize: (address: untyped) -> void
+
+  def ==: (untyped other) -> untyped
+
+  def hash: () -> untyped
+end
+```
+
+```ruby:lib/person.rb
+class Person
+  # @dynamic name, contacts
+  attr_reader :name
+  attr_reader :contacts
+
+  def initialize(name:)
+    @name = name
+    @contacts = []
+  end
+
+  def name=(name)
+    @name = name
+  end
+
+  def guess_country()
+    contacts.map do |contact|
+      case contact
+      when Phone
+        contact.country
+      end
+    end.compact.first
+  end
+end
+```
+
+```rbs:sig/person.rbs
+class Person
+  @name: untyped
+
+  @contacts: untyped
+
+  attr_reader name: untyped
+
+  attr_reader contacts: untyped
+
+  def initialize: (name: untyped) -> void
+
+  def name=: (untyped name) -> void
+
+  def guess_country: () -> untyped
+end
+```
+
+```ruby:lib/phone.rb
+class Phone
+  # @dynamic country, number
+  attr_reader :country, :number
+
+  def initialize(country:, number:)
+    @country = country
+    @number = number
+  end
+
+  def ==(other)
+    if other.is_a?(Phone)
+      # @type var other: Phone
+      other.country == country && other.number == number
+    else
+      false
+    end
+  end
+
+  def hash
+    self.class.hash ^ country.hash ^ number.hash
+  end
+end
+```
+
+```rbs:sig/phone.rbs
+class Phone
+  @country: untyped
+
+  @number: untyped
+
+  attr_reader country: untyped
+
+  attr_reader number: untyped
+
+  def initialize: (country: untyped, number: untyped) -> void
+
+  def ==: (untyped other) -> (untyped | nil)
+
+  def hash: () -> untyped
+end
+```
+
+
+========Output========
+```rbs:sig/email.rbs
+class Email
+  @address: String
+
+  attr_reader address: String
+
+  def initialize: (address: String) -> void
+
+  def ==: (Object other) -> bool
+
+  def hash: () -> Integer
+end
+```
+
+```rbs:sig/person.rbs
+class Person
+  @name: String
+
+  @contacts: Array[(Email | Phone)]
+
+  attr_reader name: String
+
+  attr_reader contacts: Array[(Email | Phone)]
+
+  def initialize: (name: String) -> void
+
+  def name=: (String name) -> void
+
+  def guess_country: () -> (String | nil)
+end
+```
+
+```rbs:sig/phone.rbs
+class Phone
+  @country: String
+
+  @number: String
+
+  attr_reader country: String
+
+  attr_reader number: String
+
+  def initialize: (country: String, number: String) -> void
+
+  def ==: (Object other) -> (bool | nil)
+
+  def hash: () -> Integer
+end
+```
+
+
+========Input========
+```ruby:lib/config.rb
+class Config
+  def self.configure(&block)
+    new.tap(&block)
+  end
+
+  %w[client role prompt].each { attr_accessor _1.to_sym }
+end
+
+if __FILE__ == $0
+  require 'dotenv/load'
+  require 'langchain'
+  require 'openai'
+
+  config = Config.configure do |config|
+    config.client = Langchain::LLM::OpenAI.new(api_key: ENV.fetch('OPENAI_ACCESS_TOKEN'))
+    config.role = 'user'
+    config.prompt = 'Hello.'
+  end
+
+  pp config.client
+  pp config.role
+  pp config.prompt
+end
+```
+
+```rbs:sig/config.rbs
+class Config
+  def self.configure: () { (untyped) -> untyped } -> untyped
+end
+```
+
+```ruby:lib/runner.rb
+require_relative 'config'
+
+class Runner
+  def initialize(config)
+    @config = config
+  end
+
+  def run
+    config.client.chat(messages: [{ role: config.role, content: config.prompt}]).chat_completion
+  end
+
+  private
+
+  attr_reader :config
+end
+
+if __FILE__ == $0
+  require 'dotenv/load'
+  require 'langchain'
+  require 'openai'
+
+  config = Config.configure do |config|
+    config.client = Langchain::LLM::OpenAI.new(api_key: ENV.fetch('OPENAI_ACCESS_TOKEN'))
+    config.role = 'user'
+    config.prompt = 'Hello.'
+  end
+  runner = Runner.new(config)
+  pp runner.run
+end
+```
+
+```rbs:sig/runner.rbs
+class Runner
+  @config: untyped
+
+  def initialize: (untyped config) -> void
+
+  def run: () -> untyped
+
+  private
+
+  attr_reader config: untyped
+end
+```
+
+
+========Output========
+
+!!!!!!!! Stats !!!!!!!!
+
+  spend: 2.2022870000218973[s]
+  prompt_tokens: 1239
+  completion_tokens: 112
+!!!!!!!! Result !!!!!!!!
+
+```rbs:sig/config.rbs
+class Config
+  attr_accessor client: Langchain::LLM::OpenAI
+  attr_accessor role: String
+  attr_accessor prompt: String
+
+  def self.configure: () { (Config) -> void } -> Config
+end
+```
+
+```rbs:sig/runner.rbs
+class Runner
+  @config: Config
+
+  def initialize: (Config config) -> void
+
+  def run: () -> untyped
+
+  private
+
+  attr_reader config: Config
+end
+```
+
+write refined rbs to sig/config.rbs
+done.
+
+write refined rbs to sig/runner.rbs
+done.
+
