@@ -1,0 +1,8 @@
+module Langchain
+  module LLM
+    class OpenAI
+      def initialize: (untyped) ->void
+      def chat: (untyped) -> untyped
+    end
+  end
+end
