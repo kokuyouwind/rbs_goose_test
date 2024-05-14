@@ -1,0 +1,17 @@
+class Config
+  def self.configure: () { (*untyped) -> untyped } -> untyped
+
+  public
+
+  def client: () -> untyped
+
+  def client=: (untyped) -> untyped
+
+  def prompt: () -> untyped
+
+  def prompt=: (untyped) -> untyped
+
+  def role: () -> untyped
+
+  def role=: (untyped) -> untyped
+end

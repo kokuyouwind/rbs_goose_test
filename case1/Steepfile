@@ -1,9 +1,9 @@
 D = Steep::Diagnostic
 
 target :lib do
-  # signature "sig"
+  signature "sig"
   # signature "sig_prototype_rb"
-  signature "sig_prototype_runtime"
+  # signature "sig_prototype_runtime"
   # signature "sig_typeprof"
   signature "sig_ext"
 
