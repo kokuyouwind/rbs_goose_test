@@ -1,0 +1,3 @@
+class Config
+  def self.configure: () { () -> untyped } -> untyped
+end
