@@ -1,0 +1,8 @@
+module Langchain
+  module LLM
+    class OpenAI
+      def initialize: (untyped) ->void
+      def complete: (untyped) -> untyped
+    end
+  end
+end
