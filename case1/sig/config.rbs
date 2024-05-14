@@ -1,3 +1,7 @@
 class Config
-  def self.configure: { (Config) -> String } -> Config
+  def self.configure: { (Config) -> void } -> Config
+    client: OpenAI::Client
+    role: String
+    prompt: String
+  end
 end
