@@ -1,0 +1,11 @@
+class Runner
+  public
+
+  def run: () -> untyped
+
+  private
+
+  def config: () -> untyped
+
+  def initialize: (untyped config) -> void
+end
