@@ -33,6 +33,24 @@ namespace :rbs_goose do
     RbsGoose.run
   end
 
+  desc 'Run rbs_goose with OpenAI GPT-4-turbo-2024-04-09 model.'
+  task :openai_gpt4 do
+    RbsGoose.configure do |config|
+      config.use_open_ai(ENV.fetch('OPENAI_ACCESS_TOKEN'), model_name: 'gpt-4-turbo-2024-04-09')
+      config.infer_template.instruction = instruction
+    end
+    RbsGoose.run
+  end
+
+  desc 'Run rbs_goose with OpenAI gpt-4o-2024-05-13 model.'
+  task :openai_gpt4o do
+    RbsGoose.configure do |config|
+      config.use_open_ai(ENV.fetch('OPENAI_ACCESS_TOKEN'), model_name: 'gpt-4o-2024-05-13')
+      config.infer_template.instruction = instruction
+    end
+    RbsGoose.run
+  end
+
   desc 'Run rbs_goose with Anthropic Claude-3-haiku-20240307 model.'
   task :anthropic_claude_haiku do
     RbsGoose.configure do |config|
