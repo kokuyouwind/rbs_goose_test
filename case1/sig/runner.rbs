@@ -1,11 +1,11 @@
 class Runner
   public
 
-  def run: () -> untyped
+  def run: () -> Langchain::ChatCompletion
 
   private
 
-  def config: () -> untyped
+  def config: () -> Config
 
-  def initialize: (untyped config) -> void
+  def initialize: (Config config) -> void
 end

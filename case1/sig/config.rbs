@@ -1,17 +1,17 @@
 class Config
-  def self.configure: () { (*untyped) -> untyped } -> untyped
+  def self.configure: () { (*Block) -> Config } -> Config
 
   public
 
-  def client: () -> untyped
+  def client: () -> Langchain::LLM::OpenAI
 
-  def client=: (untyped) -> untyped
+  def client=: (Langchain::LLM::OpenAI) -> void
 
-  def prompt: () -> untyped
+  def prompt: () -> String
 
-  def prompt=: (untyped) -> untyped
+  def prompt=: (String) -> void
 
-  def role: () -> untyped
+  def role: () -> String
 
-  def role=: (untyped) -> untyped
+  def role=: (String) -> void
 end
