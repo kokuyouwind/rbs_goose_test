@@ -82,7 +82,6 @@ namespace :rbs_goose do
   task :ollama_codegemma do
     RbsGoose.configure do |config|
       config.use_ollama(model_name: 'codegemma')
-      config.infer_template.instruction = instruction
     end
     RbsGoose.run
   end
